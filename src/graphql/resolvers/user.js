@@ -28,13 +28,13 @@ export default {
         }, {
             User
         }) => {
-            await UserAuthenticationRules.validate({
-                username,
-                password
-            }, {
-                abortEarly: false
-            });
             try {
+                await UserAuthenticationRules.validate({
+                    username,
+                    password
+                }, {
+                    abortEarly: false
+                });
                 // Find user by username
                 let user = await User.findOne({
                     username
@@ -58,7 +58,13 @@ export default {
                     token
                 }
             } catch (err) {
-                throw new ApolloError(err.message, 403);
+            	if(err.errors) 
+            	{
+                  let msg = "";
+            	  err.errors.forEach(error => msg = msg + error + '<br />')
+                  err.message = msg
+            	}
+               throw new ApolloError(err.message, 403);
             }
         }
     },
@@ -110,7 +116,6 @@ export default {
                     user: result
                 }
             } catch (err) {
-                console.log(err);
                 throw new ApolloError(err.message, 400);
             }
         }
