@@ -9,8 +9,7 @@ const title = yup
 const content = yup
     .string()
     .required('Content of the post is required.')
-    .min(10, 'Content should have atleast 10 characters.')
-    .max(3000, 'Content can have atmost 3000 characters.');
+    .min(10, 'Content should have atleast 10 characters.');
 
 export const NewPostValidationRules = yup.object().shape({
     title,

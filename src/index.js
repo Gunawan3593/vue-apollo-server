@@ -16,7 +16,7 @@ const app = express();
 
 app.use(cors());
 app.use(AuthMiddleware);
-app.use(bodyParser.json());
+app.use(bodyParser.json({"limit": "50mb"}));
 app.use(express.static(join(__dirname, "./uploads")));
 
 const server = new ApolloServer({
