@@ -10,5 +10,4 @@ export const {
   URL = `${BASE_URL}${parsed.PORT}`,
   IN_PROD = MODE !== "prod",
 } = parsed;
-
 export const PORT = process.env.PORT || parsed.PORT;
